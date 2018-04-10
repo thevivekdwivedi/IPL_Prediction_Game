@@ -28,9 +28,10 @@ router.get('/:id', (req, res) => {
  * <p>This api is used to insert the details of a particular team</p>
  */
 router.post('/insert', (req, res) => {
-    console.log("Inser request body: " + req.body);
+    console.log("Insert request body: " + req.body);
     teams.create({
-        teamName: req.body.teamName.toString()
+        teamID: req.body.teamID,
+        teamName: req.body.teamName
     }).then(team => {
         res.json(team);
     });

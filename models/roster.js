@@ -6,14 +6,18 @@ const roster = db.define('roster', {
     matchID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        defaultValue: 1,
+        validate: {
+            isNumeric: true
+        }
     },
     team1: {
         type: Sequelize.STRING(5),
         allowNull: false,
         references: {
             model: teams,
-            key: 'teamID',
+            key: 'team1_ID'
         }
     },
     team2: {
@@ -21,7 +25,7 @@ const roster = db.define('roster', {
         allowNull: false,
         references: {
             model: teams,
-            key: teamID
+            key: 'team2_ID'
         }
     },
     matchDate: {
@@ -34,25 +38,10 @@ const roster = db.define('roster', {
     },
     matchDecision: {
         type: Sequelize.ENUM("1", "2", "Tie", "Abandon"),
-        allowNull: false
+        allowNull: true
     }
 }, {
         getterMethods: {
-            getMatchID() {
-                return this.matchID;
-            },
-            getTeam1() {
-                return this.team1;
-            },
-            getTeam2() {
-                return this.team2;
-            },
-            getMatchDate() {
-                return this.matchDate;
-            },
-            getMatchTime() {
-                return this.matchTime;
-            },
             shouldSurveyBeClosedNow() {
                 db.query('select TIME_TO_SEC(TIMEDIFF(matchTime, TIME(NOW()))) from roster').then(timeDiff => {
                     if (timeDiff <= 0) {
@@ -65,9 +54,9 @@ const roster = db.define('roster', {
             getMatchDecision() {
                 switch (this.matchDecision) {
                     case "1":
-                        return teams.findById(this.getTeam1()).getTeamName();
+                        return teams.findById(this.getTeam1());
                     case "2":
-                        return teams.findById(this.getTeam2()).getTeamName();
+                        return teams.findById(this.getTeam2());
                     default:
                         return this.matchDecision;
                 }

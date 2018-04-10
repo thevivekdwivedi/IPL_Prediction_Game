@@ -11,23 +11,6 @@ const teams = db.define('teams', {
         allowNull: false,
         unique: true
     }
-}, {
-        getterMethods: {
-            getTeamID() {
-                return this.teamID;
-            },
-            getTeamName() {
-                return this.teamName;
-            }
-        },
-        setterMethods: {
-            setTeamID(id) {
-                this.teamID = id;
-            },
-            setTeamName(name) {
-                this.teamName = name;
-            }
-        }
-    });
+});
 
 module.exports = teams;
