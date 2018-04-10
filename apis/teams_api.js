@@ -35,3 +35,5 @@ router.post('/insert', (req, res) => {
         res.json(team);
     });
 });
+
+module.exports = router;
