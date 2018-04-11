@@ -32,6 +32,9 @@ router.get('/:matchID', (req, res) => {
     });
 });
 
+/**
+ * <p>This method inserts a match into the roster</p>
+ */
 router.post('/isnert', (req, res) => {
     console.log("Insert body: " + req.body);
     rosterModel.create({
@@ -39,6 +42,8 @@ router.post('/isnert', (req, res) => {
         team2: req.body.team2,
         matchDate: req.body.matchDate,
         matchTime: req.body.matchTime,
+        matchDecision: req.body.matchDecision,
+        bidStatus: req.body.bidStatus
     }).then(match => {
         res.json(match);
     });

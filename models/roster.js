@@ -37,8 +37,14 @@ const roster = db.define('roster', {
         allowNull: false
     },
     matchDecision: {
-        type: Sequelize.ENUM("1", "2", "Tie", "Abandon"),
-        allowNull: true
+        type: Sequelize.ENUM("1", "2", "Tie", "Abandon","Yet to start"),
+        allowNull: true,
+        defaultValue: "Yet to start"
+    },
+    bidStatus: {
+        type: Sequelize.ENUM("Yet to be opened","Opened for bidding","Closed"),
+        allowNull:false,
+        defaultValue: "Yet to be opened"
     }
 }, {
         getterMethods: {
