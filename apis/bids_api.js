@@ -71,3 +71,5 @@ router.put('/reviseBid', (req, res) => {
         console.log("Bid could not be revised: " + err);
     });
 });
+
+module.exports = router;

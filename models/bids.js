@@ -24,7 +24,7 @@ const bids = db.define('bids', {
         }
     },
     userID: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         validate: {
             isAlphanumeric: true
         },
@@ -55,14 +55,6 @@ const bids = db.define('bids', {
         type: Sequelize.TIME,
         allowNull: false,
         defaultValue: Sequelize.NOW
-    }
-}, {
-    getterMethods: {
-        getMatchDetails() {
-            users.findById(matchID).then(mathcDetails => {
-                return matchDetails.team1 + " v " + matchDetails.team2 + ", Date " + matchDetails.matchDate + ", Time " + matchDetails.matchTime + ", Decision " + matchDetails.matchDecision + ", Bid Status " + matchDetails.bidStatus
-            });
-        }
     }
 });
 
