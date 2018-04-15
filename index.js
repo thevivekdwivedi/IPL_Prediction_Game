@@ -14,7 +14,7 @@ var teams = require('./apis/teams_api');
 var users = require('./apis/users_api');
 var userCreds = require('./apis/userCreds_api');
 var roster = require('./apis/roster_api');
-// var bids = require('./apis/bids_api');
+var bids = require('./apis/bids_api');
 
 app.use('/teams', teams);
 app.use('/users', users);
