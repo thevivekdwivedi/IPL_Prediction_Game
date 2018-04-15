@@ -6,6 +6,7 @@ var rosterModel = require('../models/roster');
 
 /**
  * <p>This method returns the entire roster</p>
+ * @author Vivek Dwivedi
  */
 router.get('/', (req, res) => {
     rosterModel.findAll().then(roster => {
@@ -24,6 +25,7 @@ router.get('/', (req, res) => {
 
 /**
  * <p>This method returns a particular match</p>
+ * @author Vivek Dwivedi
  */
 router.get('/:matchID', (req, res) => {
     rosterModel.findById(req.params.matchID).then(match => {
@@ -34,6 +36,7 @@ router.get('/:matchID', (req, res) => {
 
 /**
  * <p>This method inserts a match into the roster</p>
+ * @author Vivek Dwivedi
  */
 router.post('/isnert', (req, res) => {
     console.log("Insert body: " + req.body);

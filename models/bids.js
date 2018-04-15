@@ -45,6 +45,16 @@ const bids = db.define('bids', {
             max: 50,
             min: 5
         }
+    },
+    revisedBid: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    timestamp: {
+        type: Sequelize.TIME,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
     }
 }, {
     getterMethods: {
