@@ -20,7 +20,7 @@ app.use('/teams', teams);
 app.use('/users', users);
 app.use('/userCreds', userCreds);
 app.use('/roster', roster);
-// app.use('/bids', bids);
+app.use('/bids', bids);
 
 const port = 4000;
 
