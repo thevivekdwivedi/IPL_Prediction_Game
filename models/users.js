@@ -22,6 +22,10 @@ const users = db.define('users', {
         validate: {
             isAlpha: true
         }
+    },
+    role: {
+        type: Sequelize.ENUM("Admin", "Player"),
+        allowNull: false
     }
 });
 
