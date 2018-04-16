@@ -18,6 +18,14 @@ const userCreds = db.define('userCreds', {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: "123456"
+    },
+    apiKey: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            isAlphanumeric: true
+        }
     }
 });
 

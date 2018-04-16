@@ -27,14 +27,6 @@ const users = db.define('users', {
         type: Sequelize.ENUM("Admin", "Player"),
         allowNull: false
     },
-    apiKey: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            isAlphanumeric: true
-        }
-    },
     emailID: {
         type: Sequelize.STRING,
         allowNull: false,

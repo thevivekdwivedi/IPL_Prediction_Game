@@ -10,14 +10,21 @@ var authentication = require('./authentication');
  * @author Vivek Dwivedi
  */
 router.get('/', (req, res) => {
-    usersModel.findAll({
-        attributes: {
-            exclude: ['apiKey']
-        }
-    }).then(users => {
-        console.log("User list: " + users);
-        res.json(users);
-    });
+    var requester = req.body.requester;
+    var apiKey = req.body.apiKey;
+    if (authentication.isRequesterAuthorizedAndAdmin(requester, apiKey)) {
+        usersModel.findAll().then(usersArray => {
+            console.log("User array: " + usersArray);
+            res.json(usersArray);
+        }).catch(err => {
+            console.error("Could not retrieve users data.");
+            res.json(err);
+        });
+    } else {
+        var errorMessage = "You are not authorized to access this.";
+        console.error("Unathorized access request.");
+        res.json(errorMessage);
+    }
 });
 
 /**
@@ -25,17 +32,30 @@ router.get('/', (req, res) => {
  * @author Vivek Dwivedi
  */
 router.get('/:userID', (req, res) => {
-    usersModel.findOne({
-        where: {
-            userID: req.params.userID
-        },
-        attributes: {
-            exclude: ['apiKey']
-        }
-    }).then(user => {
-        console.log("User: " + user);
-        res.json(user);
-    });
+    var requester = req.body.requester;
+    var apiKey = req.body.apiKey;
+    var shouldAccessBeAllowed = false;
+
+    if (requester == req.body.requester) {
+        shouldAccessBeAllowed = authentication.isRequesterAuthorized(requester, apiKey);
+    } else {
+        shouldAccessBeAllowed = authentication.isRequesterAuthorizedAndAdmin(requester, apiKey);
+    }
+
+    if (shouldAccessBeAllowed) {
+        usersModel.findOne({
+            where: {
+                userID: req.params.userID
+            }
+        }).then(user => {
+            console.log("User: " + user);
+            res.json(user);
+        }).catch(err => {
+            var errorMessage = "You are not authorized to access this.";;
+            console.error("Unauthorized access request.");
+            res.json(errorMessage);
+        });
+    }
 });
 
 /**
