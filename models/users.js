@@ -18,7 +18,7 @@ const users = db.define('users', {
     },
     lastName: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
             isAlpha: true
         }

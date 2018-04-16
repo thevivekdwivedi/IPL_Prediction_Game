@@ -8,7 +8,11 @@ var userCredsModel = require('../models/userCreds');
  * <p>This method returns a particular user's credentials</p>
  */
 router.get('/:userID', (req, res) => {
-    userCredsModel.findById(req.params.userID).then(user => {
+    userCredsModel.findById(req.params.userID, {
+        attributes: {
+            exclude: ['apiKey']
+        }
+    }).then(user => {
         console.log("User: " + user);
         res.json(user);
     });
@@ -20,7 +24,8 @@ router.get('/:userID', (req, res) => {
 router.post('/insert', (req, res) => {
     userCredsModel.create({
         userID: req.body.userID,
-        password: req.body.password
+        password: req.body.password,
+        apiKey: req.body.apiKey
     }).then(user => {
         res.json(user);
     });

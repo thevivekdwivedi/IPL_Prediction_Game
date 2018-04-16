@@ -53,8 +53,7 @@ const bids = db.define('bids', {
     },
     timestamp: {
         type: Sequelize.TIME,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
+        allowNull: false
     }
 }, {
     getterMethods: {
