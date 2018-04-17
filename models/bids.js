@@ -54,6 +54,14 @@ const bids = db.define('bids', {
     timestamp: {
         type: Sequelize.TIME,
         allowNull: false
+    },
+    winningAmount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+        validate: {
+            isNumeric: true
+        }
     }
 }, {
     getterMethods: {
