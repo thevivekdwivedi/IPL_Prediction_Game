@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `ipl` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `ipl`;
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
 -- Host: 127.0.0.1    Database: ipl
@@ -30,6 +32,7 @@ CREATE TABLE `bids` (
   `bidAmount` int(11) DEFAULT NULL,
   `revisedBid` tinyint(1) NOT NULL DEFAULT '0',
   `timestamp` timestamp(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4) ON UPDATE CURRENT_TIMESTAMP(4),
+  `winningAmount` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`bidID`),
   KEY `bid_userID_fk_idx` (`userID`),
   KEY `bid_matchID_fk_idx` (`matchID`),
@@ -56,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-17  0:36:10
+-- Dump completed on 2018-04-17 23:44:19
