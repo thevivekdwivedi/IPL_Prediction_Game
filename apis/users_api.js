@@ -9,7 +9,9 @@ var authentication = require('./authentication');
  * <p>This method returns all the users.</p>
  * @author Vivek Dwivedi
  */
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
+    console.log("req: " + req.body.requester + " " + req.body.apiKey);
+    
     var requester = req.body.requester;
     var apiKey = req.body.apiKey;
     if (authentication.isRequesterAuthorizedAndAdmin(requester, apiKey)) {
@@ -31,7 +33,7 @@ router.get('/', (req, res) => {
  * <p>This method returns a particular user</p>
  * @author Vivek Dwivedi
  */
-router.get('/:userID', (req, res) => {
+router.post('/:userID', (req, res) => {
     var requester = req.body.requester;
     var apiKey = req.body.apiKey;
     var shouldAccessBeAllowed = false;

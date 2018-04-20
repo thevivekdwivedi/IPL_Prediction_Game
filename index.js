@@ -24,6 +24,6 @@ app.use('/bids', bids);
 
 const port = 4000;
 
-app.listen(port, function() {
+app.listen(port, function () {
     console.log('Listening on port: ' + port);
 })
