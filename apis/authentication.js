@@ -17,7 +17,7 @@ module.exports = {
         // re-encrypt the decrypted api key. If this matches the one in the table, then we go through, else we don't allow access.
         apiKey = crypt.AES.encrypt(apiKey, apiKeySecret);
 
-        return apikey;
+        return apiKey;
     },
 
     /**
