@@ -10,7 +10,7 @@ var usersModel = require('../models/users');
 
 module.exports = {
 
-    _cleanTheAPIKey(apikey) {
+    _cleanTheAPIKey(apiKey) {
         // decrypt the apikey with the api key secret
         var decryptedBytes = crypt.AES.decrypt(apiKey, apiKeySecret);
         apiKey = decryptedBytes.toString(crypt.enc.Utf8);
@@ -27,7 +27,7 @@ module.exports = {
      * @param {*} apiKey <p>The apiKey of the user requesting data</p>
      */
     isRequesterAuthorized(requester, apiKey) {
-        
+
         apiKey = this._cleanTheAPIKey(apiKey);
 
         usersModel.findById(requester).then(requestingUser => {
