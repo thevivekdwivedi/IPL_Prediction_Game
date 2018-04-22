@@ -14,7 +14,9 @@ router.post('/', (req, res) => {
     
     var requester = req.body.requester;
     var apiKey = req.body.apiKey;
-    if (authentication.isRequesterAuthorizedAndAdmin(requester, apiKey)) {
+    var shouldAccessBeAllowed = authentication.isRequesterAuthorized(requester, apiKey, (shouldAccessBeAllowed, err));
+   
+    if (shouldAccessBeAllowed) {
         usersModel.findAll().then(usersArray => {
             console.log("User array: " + usersArray);
             res.json(usersArray);

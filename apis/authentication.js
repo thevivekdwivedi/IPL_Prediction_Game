@@ -5,17 +5,22 @@ const crypt = require('crypto-js');
 
 const apiKeySecret = process.env.APIKEY_SECRET;
 
-var usersModel = require('../models/users');
+var userCredsModel = require('../models/userCreds');
 
 
 module.exports = {
 
     _cleanTheAPIKey(apiKey) {
         // decrypt the apikey with the api key secret
-        var decryptedBytes = crypt.AES.decrypt(apiKey, apiKeySecret);
-        apiKey = decryptedBytes.toString(crypt.enc.Utf8);
-        // re-encrypt the decrypted api key. If this matches the one in the table, then we go through, else we don't allow access.
-        apiKey = crypt.AES.encrypt(apiKey, apiKeySecret);
+        // console.log("API Key: " + apiKey.toString());
+        // console.log("API Key Secret: " + apiKeySecret);
+        
+        // var decryptedBytes = crypt.AES.decrypt(apiKey.toString(), apiKeySecret.toString());
+        // console.log("Decrypted:"+decryptedBytes);
+        
+        // apiKey = decryptedBytes.toString(crypt.enc.Utf8);
+        // // re-encrypt the decrypted api key. If this matches the one in the table, then we go through, else we don't allow access.
+        // apiKey = crypt.AES.encrypt(apiKey, apiKeySecret);
 
         return apiKey;
     },
@@ -26,21 +31,21 @@ module.exports = {
      * @param {*} requester <p>The userID of the user requesting data</p>
      * @param {*} apiKey <p>The apiKey of the user requesting data</p>
      */
-    isRequesterAuthorized(requester, apiKey) {
+    isRequesterAuthorized(requester, apiKey, callback) {
 
         apiKey = this._cleanTheAPIKey(apiKey);
 
-        usersModel.findById(requester).then(requestingUser => {
+        userCredsModel.findById(requester).then(requestingUser => {
             if (requestingUser.apiKey == apiKey) {
                 console.log("User is authenticated.");
-                return true;
+                return callback(true, null);
             } else {
                 console.error("User is not authenticated");
-                return false;
+                return callback(false, null);
             }
         }).catch(err => {
             console.error("Could not authenticate.");
-            return false;
+            return callback(false, err);
         });
     },
 
@@ -54,7 +59,7 @@ module.exports = {
 
         apiKey = this._cleanTheAPIKey(apiKey);
 
-        usersModel.findById(requester).then(requestingUser => {
+        userCredsModel.findById(requester).then(requestingUser => {
             if (requestingUser.role == "Admin") {
                 console.log("User is admin and authenticated.");
                 isAdmin = true;
