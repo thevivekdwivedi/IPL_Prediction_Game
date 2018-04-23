@@ -31,21 +31,22 @@ module.exports = {
      * @param {*} requester <p>The userID of the user requesting data</p>
      * @param {*} apiKey <p>The apiKey of the user requesting data</p>
      */
-    isRequesterAuthorized(requester, apiKey, callback) {
-
+    isRequesterAuthorized(requester, apiKey) {
         apiKey = this._cleanTheAPIKey(apiKey);
 
-        userCredsModel.findById(requester).then(requestingUser => {
-            if (requestingUser.apiKey == apiKey) {
-                console.log("User is authenticated.");
-                return callback(true, null);
-            } else {
-                console.error("User is not authenticated");
-                return callback(false, null);
-            }
-        }).catch(err => {
-            console.error("Could not authenticate.");
-            return callback(false, err);
+        return new Promise((resolve, reject) => {
+            userCredsModel.findById(requester).then(requestingUser => {
+                if (requestingUser.apiKey == apiKey) {
+                    console.log("User is authenticated.");
+                    resolve(JSON.parse(true));
+                } else {
+                    console.error("User is not authenticated");
+                    resolve(JSON.parse(false));
+                }
+            }).catch(err => {
+                console.error("Could not authenticate.");
+                reject(JSON.parse(err));
+            });
         });
     },
 
@@ -55,24 +56,22 @@ module.exports = {
      * @param {*} requester <p>The userID of the user requesting date</p>
      */
     isReuqesterAnAdmin(requester) {
-        var isAdmin = false;
-
         apiKey = this._cleanTheAPIKey(apiKey);
 
-        userCredsModel.findById(requester).then(requestingUser => {
-            if (requestingUser.role == "Admin") {
-                console.log("User is admin and authenticated.");
-                isAdmin = true;
-            } else {
-                console.error("User is authenticated but not an admin.");
-                isAdmin = false;
-            }
-        }).catch(err => {
-            console.error("Could not confirm if user is admin or not");
-            isAdmin = false;
+        return new Promise((resolve, reject) => {
+            userCredsModel.findById(requester).then(requestingUser => {
+                if (requestingUser.role == "Admin") {
+                    console.log("User is admin and authenticated.");
+                    resolve(JSON.parse(true));
+                } else {
+                    console.error("User is authenticated but not an admin.");
+                    resolve(JSON.parse(false));
+                }
+            }).catch(err => {
+                console.error("Could not confirm if user is admin or not");
+                reject(JSON.parse(err));
+            });
         });
-
-        return isAdmin;
     },
 
     /**
@@ -82,17 +81,24 @@ module.exports = {
      * @param {*} apiKey <p>The apiKey of the user requesting data</p>
      */
     isRequesterAuthorizedAndAdmin(requester, apiKey) {
-        var isAuthorized = this.isRequesterAuthorized(requester, apiKey);
-        var isAdmin = false;
-
         apiKey = this._cleanTheAPIKey(apiKey);
 
-        if (isAuthorized) {
-            isAdmin = isReuqesterAnAdmin(requester);
-        } else {
-            return isAuthorized;
-        }
-
-        return isAdmin && isAuthorized;
+        this.isRequesterAuthorized(requester, apiKey).then(isAuthorized => {
+            if (isAuthorized) {
+                this.isReuqesterAnAdmin(requester).then(isAdmin => {
+                    if (isAdmin) {
+                        resolve(JSON.parse(true));
+                    } else {
+                        resolve(JSON.parse(false));
+                    }
+                }).catch(err => {
+                    reject(err);
+                });
+            } else {
+                resolve(JSON.parse(false));
+            }
+        }).catch(err => {
+            reject(JSON.parse(err));
+        });
     }
 };
