@@ -16,26 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `roles`
+-- Table structure for table `rules`
 --
 
-DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `rules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `roles` (
-  `roleNames` varchar(45) NOT NULL,
-  PRIMARY KEY (`roleNames`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `rules` (
+  `ruleID` int(11) NOT NULL AUTO_INCREMENT,
+  `ruleName` varchar(45) NOT NULL,
+  `ruleValue` int(11) NOT NULL,
+  PRIMARY KEY (`ruleID`),
+  UNIQUE KEY `ruleName_UNIQUE` (`ruleName`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roles`
+-- Dumping data for table `rules`
 --
 
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES ('Admin'),('Player');
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+LOCK TABLES `rules` WRITE;
+/*!40000 ALTER TABLE `rules` DISABLE KEYS */;
+INSERT INTO `rules` VALUES (1,'Bid Start',-24),(2,'Bid End',-4),(3,'Revision Start',-4),(4,'Revision End',-1);
+/*!40000 ALTER TABLE `rules` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -47,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-20  7:33:05
+-- Dump completed on 2018-04-23 22:15:48
