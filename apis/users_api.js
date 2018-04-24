@@ -11,24 +11,28 @@ var authentication = require('./authentication');
  */
 router.post('/', (req, res) => {
     console.log("req: " + req.body.requester + " " + req.body.apiKey);
-    
+
     var requester = req.body.requester;
     var apiKey = req.body.apiKey;
-    var shouldAccessBeAllowed = authentication.isRequesterAuthorized(requester, apiKey, (shouldAccessBeAllowed, err));
-   
-    if (shouldAccessBeAllowed) {
-        usersModel.findAll().then(usersArray => {
-            console.log("User array: " + usersArray);
-            res.json(usersArray);
-        }).catch(err => {
-            console.error("Could not retrieve users data.");
-            res.json(err);
-        });
-    } else {
-        var errorMessage = "You are not authorized to access this.";
-        console.error("Unathorized access request.");
-        res.json(errorMessage);
-    }
+
+    authentication.isRequesterAuthorized(requester, apiKey).then(shouldAccessBeAllowed => {
+        if (shouldAccessBeAllowed) {
+            usersModel.findAll().then(usersArray => {
+                console.log("User array: " + usersArray);
+                res.json(usersArray);
+            }).catch(err => {
+                console.error("Could not retrieve users data.");
+                res.json(err);
+            });
+        } else {
+            var errorMessage = "You are not authorized to access this.";
+            console.error("Unathorized access request.");
+            res.json(errorMessage);
+        }
+    }).catch(err => {
+        console.error(err);
+        res.json(err);
+    });
 });
 
 /**
@@ -75,7 +79,7 @@ router.post('/insert', (req, res) => {
     if (!authentication.isReuqesterAnAdmin(requester)) {
         newUserRole = "Player";
     }
-    
+
     if (canUserBeCreated) {
         usersModel.create({
             userID: req.body.userID,
