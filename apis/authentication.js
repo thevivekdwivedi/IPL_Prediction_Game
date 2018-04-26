@@ -83,22 +83,41 @@ module.exports = {
     isRequesterAuthorizedAndAdmin(requester, apiKey) {
         apiKey = this._cleanTheAPIKey(apiKey);
 
-        this.isRequesterAuthorized(requester, apiKey).then(isAuthorized => {
-            if (isAuthorized) {
-                this.isReuqesterAnAdmin(requester).then(isAdmin => {
-                    if (isAdmin) {
-                        resolve(JSON.parse(true));
-                    } else {
-                        resolve(JSON.parse(false));
-                    }
-                }).catch(err => {
-                    reject(err);
-                });
-            } else {
-                resolve(JSON.parse(false));
-            }
-        }).catch(err => {
-            reject(JSON.parse(err));
+        return new Promise((resolve, reject) => {
+            this.isRequesterAuthorized(requester, apiKey).then(isAuthorized => {
+                if (isAuthorized) {
+                    this.isReuqesterAnAdmin(requester).then(isAdmin => {
+                        if (isAdmin) {
+                            resolve(JSON.parse(true));
+                        } else {
+                            resolve(JSON.parse(false));
+                        }
+                    }).catch(err => {
+                        reject(err);
+                    });
+                } else {
+                    resolve(JSON.parse(false));
+                }
+            }).catch(err => {
+                reject(JSON.parse(err));
+            });
         });
+    },
+
+    /**
+     * <p>This method returns the standard error message when an unauthorized user makes a request.</p>
+     * @author Vivek Diwvedi
+     */
+    userUnauthorizedAccessString() {
+        return "You are not authorized to access this.";
+    },
+
+    /**
+     * <p>This method returns the standard error message for an unauthorized access request.</p>
+     * @author Vivek Diwvedi
+     */
+    unauthorizedAccessRequestString() {
+        return "Unauthorized access request.";
     }
+
 };

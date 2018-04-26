@@ -5,31 +5,33 @@ const db = require('../db/dbConnection');
 
 var authentication = require('./authentication');
 
-var requester, apiKey, errorMessage, shouldAccessBeAllowed;
+var requester, apiKey, errorMessage;
 
 /**
  * <p>This api is used to get the leaderboard for the season</p>
  * @author Vivek Dwivedi
  */
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
     requester = req.body.requester;
     apiKey = req.body.apiKey;
-    shouldAccessBeAllowed = authentication.isRequesterAuthorized(requester, apiKey);
+    authentication.isRequesterAuthorized(requester, apiKey).then(shouldAccessBeAllowed => {
+        if (shouldAccessBeAllowed) {
+            db.query('select * from leaderboard;', {
+                type: Sequelize.QueryTypes.SELECT
+            }).then(leaderboard => {
+                console.log("Leaderboard: " + leaderboard);
+                res.json(leaderboard);
+            }).catch(err => {
+                errorMessage = "Unable to retrieve leaderboard.";
+                console.error(errorMessage);
+                res.json(errorMessage);
+            });
+        } else {
+            res.json(authentication.userUnauthorizedAccessString());
+        }
+    }).catch(err => {
+        res.json(authentication.unauthorizedAccessRequestString());
+    });
+});
 
-    if (shouldAccessBeAllowed) {
-        db.query('select * from leaderboard;', {
-            type: Sequelize.QueryTypes.SELECT
-        }).then(leaderboard => {
-            console.log("Leaderboard: " + leaderboard);
-            res.json(leaderboard);
-        }).catch(err => {
-            errorMessage = "Unable to retrieve leaderboard.";
-            console.error(errorMessage);
-            res.json(errorMessage);
-        });
-    } else {
-        errorMessage = "You are not authorized to access this information.";
-        console.error(errorMessage);
-        res.json(errorMessage);
-    }
-})
+module.exports = router;

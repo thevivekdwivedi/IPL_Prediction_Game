@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 var userCredsModel = require('../models/userCreds');
 var authentication = require('./authentication');
 
-var requester, apiKey, shouldAccessBeAllowed, errorMessage;
+var requester, apiKey, errorMessage = "User credentials could not be retrieved.";
 
 /**
  * <p>This method returns a particular user's credentials</p>
@@ -15,26 +15,29 @@ router.get('/:userID', (req, res) => {
     requester = req.body.requester;
     apiKey = req.body.apiKey;
 
+    var authorization;
+
     if (requester == req.params.userID) {
-        shouldAccessBeAllowed = authentication.isRequesterAuthorized(requester, apiKey);
+        authorization = authentication.isRequesterAuthorized(requester, apiKey);
     } else {
-        shouldAccessBeAllowed = authentication.isRequesterAuthorizedAndAdmin(requester, apiKey);
+        authorization = authentication.isRequesterAuthorizedAndAdmin(requester, apiKey);
     }
 
-    if (shouldAccessBeAllowed) {
-        userCredsModel.findById(req.params.userID).then(user => {
-            console.log("User: " + user);
-            res.json(user);
-        }).catch(err => {
-            errorMessage = "User credentials could not be retrieved.";
-            console.error(errorMessage);
-            res.json(err);
-        });
-    } else {
-        errorMessage = "You are not allowed to access this.";
-        console.error(errorMessage);
-        res.json(errorMessage);
-    }
+    authorization.then(shouldAccessBeAllowed => {
+        if (shouldAccessBeAllowed) {
+            userCredsModel.findById(req.params.userID).then(user => {
+                console.log("User: " + user);
+                res.json(user);
+            }).catch(err => {
+                console.error(errorMessage);
+                res.json(err);
+            });
+        } else {
+            res.json(authentication.userUnauthorizedAccessString());
+        }
+    }).catch(err => {
+        res.json(authentication.unauthorizedAccessRequestString());
+    })
 });
 
 /**
@@ -44,27 +47,27 @@ router.get('/:userID', (req, res) => {
 router.post('/insert', (req, res) => {
     requester = req.body.requester;
     apiKey = req.body.apiKey;
-    shouldAccessBeAllowed = authentication.isRequesterAuthorizedAndAdmin(requester, apiKey);
 
-    if (shouldAccessBeAllowed) {
-        userCredsModel.create({
-            userID: req.body.userID,
-            password: req.body.password,
-            apiKey: req.body.apiKey
-        }).then(user => {
-            console.log("Inserted credentials: " + user);
-            res.json(user);
-        }).catch(err => {
-            errorMessage = "Credentials could not be inserted.";
-            console.error(errorMessage);
-            res.json(err);
-        })
-    } else {
-        errorMessage = "You are not allowed to access this.";
-        console.error(errorMessage);
-        res.json(errorMessage);
-    }
-    
+    authentication.isRequesterAuthorizedAndAdmin(requester, apiKey).then(shouldAccessBeAllowed => {
+        if (shouldAccessBeAllowed) {
+            userCredsModel.create({
+                userID: req.body.userID,
+                password: req.body.password,
+                apiKey: req.body.apiKey
+            }).then(user => {
+                console.log("Inserted credentials: " + user);
+                res.json(user);
+            }).catch(err => {
+                errorMessage = "Credentials could not be inserted.";
+                console.error(errorMessage);
+                res.json(err);
+            })
+        } else {
+            res.json(authentication.userUnauthorizedAccessString());
+        }
+    }).catch(err => {
+        res.json(authentication.unauthorizedAccessRequestString());
+    })
 });
 
 module.exports = router;
