@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `ipl` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `ipl`;
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
 -- Host: 127.0.0.1    Database: ipl
@@ -26,8 +24,8 @@ DROP TABLE IF EXISTS `userCreds`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userCreds` (
   `userID` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `apiKey` varchar(45) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `apiKey` varchar(128) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `apiKey_UNIQUE` (`apiKey`),
   CONSTRAINT `userID_fk` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -40,6 +38,7 @@ CREATE TABLE `userCreds` (
 
 LOCK TABLES `userCreds` WRITE;
 /*!40000 ALTER TABLE `userCreds` DISABLE KEYS */;
+INSERT INTO `userCreds` VALUES ('thevivekdwivedi','core2608A-','thevivekdwivedi has access');
 /*!40000 ALTER TABLE `userCreds` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-17 23:44:19
+-- Dump completed on 2018-04-23 22:15:49
