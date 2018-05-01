@@ -1,7 +1,10 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('ipl','root','root', {
+const dbPassword = process.env.DB_PASSWORD;
+
+const sequelize = new Sequelize('ipl','root',dbPassword.toString(), {
     host: 'localhost',
     dialect: 'mysql',
+    port: 3306,
     pool: {
         max: 100,
         min: 1,

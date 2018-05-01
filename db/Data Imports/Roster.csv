@@ -1,0 +1,35 @@
+matchID,team1,team2,matchDate,matchTime,matchDecision,bidStatus
+1,MI,CSK,07/04/18,20:00:00,2,Closed
+2,DD,KXIP,08/04/18,16:00:00,2,Closed
+3,RCB,KKR,08/04/18,20:00:00,2,Closed
+4,SRH,RR,09/04/18,20:00:00,1,Closed
+5,CSK,KKR,10/04/18,20:00:00,1,Closed
+6,RR,DD,11/04/18,20:00:00,1,Closed
+7,SRH,MI,12/04/18,20:00:00,1,Closed
+8,RCB,KXIP,13/04/18,20:00:00,1,Closed
+9,MI,DD,14/04/18,16:00:00,2,Closed
+10,KKR,SRH,14/04/18,20:00:00,2,Closed
+11,RCB,RR,15/04/18,16:00:00,2,Closed
+12,KXIP,CSK,15/04/18,20:00:00,1,Closed
+13,KKR,DD,16/04/18,20:00:00,1,Closed
+14,MI,RCB,17/04/18,20:00:00,1,Closed
+15,RR,KKR,18/04/18,20:00:00,2,Closed
+16,KXIP,SRH,19/04/18,20:00:00,1,Closed
+17,CSK,RR,20/04/18,20:00:00,1,Closed
+18,KKR,KXIP,21/04/18,16:00:00,2,Closed
+19,RCB,DD,21/04/18,20:00:00,1,Closed
+20,SRH,CSK,22/04/18,16:00:00,2,Closed
+21,RR,MI,22/04/18,20:00:00,1,Closed
+22,DD,KXIP,23/04/18,20:00:00,2,Closed
+23,MI,SRH,24/04/18,20:00:00,2,Closed
+24,RCB,CSK,25/04/18,20:00:00,2,Closed
+25,SRH,KXIP,26/04/18,20:00:00,1,Closed
+26,DD,KKR,27/04/18,20:00:00,1,Closed
+27,CSK,MI,28/04/18,20:00:00,2,Closed
+28,SRH,RR,29/04/18,16:00:00,1,Closed
+29,RCB,KKR,29/04/18,20:00:00,2,Closed
+30,CSK,DD,30/04/18,20:00:00,1,Closed
+31,RCB,MI,01/05/18,20:00:00,Yet to start,Open for revision bids
+32,DD,RR,02/05/18,20:00:00,Yet to start,Yet to be openend
+33,KKR,CSK,03/05/18,20:00:00,Yet to start,Yet to be openend
+34,KXIP,MI,04/05/18,20:00:00,Yet to start,Yet to be openend
