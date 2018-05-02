@@ -1,8 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS `ipl` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `ipl`;
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
--- Host: 127.0.0.1    Database: ipl
+-- Host: localhost    Database: ipl
 -- ------------------------------------------------------
--- Server version	5.7.19
+-- Server version	8.0.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,13 +32,14 @@ CREATE TABLE `roster` (
   `matchTime` time(4) NOT NULL,
   `matchDecision` enum('1','2','Tie','Abandon','Yet to start') NOT NULL,
   `bidStatus` enum('Yet to be openend','Opened for bidding','Open for revision bids','Closed') NOT NULL,
+  `matchPool` int(11) DEFAULT '0',
   PRIMARY KEY (`matchID`),
   KEY `team1_fk_idx` (`team1`,`team2`),
   KEY `team1_key_idx` (`team1`),
   KEY `team2_key_idx` (`team2`),
-  CONSTRAINT `team1_key` FOREIGN KEY (`team1`) REFERENCES `teams` (`teamID`) ON UPDATE CASCADE,
-  CONSTRAINT `team2_key` FOREIGN KEY (`team2`) REFERENCES `teams` (`teamID`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `team1_key` FOREIGN KEY (`team1`) REFERENCES `teams` (`teamid`) ON UPDATE CASCADE,
+  CONSTRAINT `team2_key` FOREIGN KEY (`team2`) REFERENCES `teams` (`teamid`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,42 +48,9 @@ CREATE TABLE `roster` (
 
 LOCK TABLES `roster` WRITE;
 /*!40000 ALTER TABLE `roster` DISABLE KEYS */;
+INSERT INTO `roster` VALUES (1,'MI','CSK','2007-04-18','20:00:00.0000','2','Closed',85),(2,'DD','KXIP','2008-04-18','16:00:00.0000','2','Closed',45),(3,'RCB','KKR','2008-04-18','20:00:00.0000','2','Closed',75),(4,'SRH','RR','2009-04-18','20:00:00.0000','1','Closed',60),(5,'CSK','KKR','2010-04-18','20:00:00.0000','1','Closed',185),(6,'RR','DD','2011-04-18','20:00:00.0000','1','Closed',215),(7,'SRH','MI','2012-04-18','20:00:00.0000','1','Closed',360),(8,'RCB','KXIP','2013-04-18','20:00:00.0000','1','Closed',375),(9,'MI','DD','2014-04-18','16:00:00.0000','2','Closed',320),(10,'KKR','SRH','2014-04-18','20:00:00.0000','2','Closed',320),(11,'RCB','RR','2015-04-18','16:00:00.0000','2','Closed',180),(12,'KXIP','CSK','2015-04-18','20:00:00.0000','1','Closed',305),(13,'KKR','DD','2016-04-18','20:00:00.0000','1','Closed',380),(14,'MI','RCB','2017-04-18','20:00:00.0000','1','Closed',330),(15,'RR','KKR','2018-04-18','20:00:00.0000','2','Closed',450),(16,'KXIP','SRH','2019-04-18','20:00:00.0000','1','Closed',310),(17,'CSK','RR','2020-04-18','20:00:00.0000','1','Closed',400),(18,'KKR','KXIP','2021-04-18','16:00:00.0000','2','Closed',225),(19,'RCB','DD','2021-04-18','20:00:00.0000','1','Closed',335),(20,'SRH','CSK','2022-04-18','16:00:00.0000','2','Closed',265),(21,'RR','MI','2022-04-18','20:00:00.0000','1','Closed',420),(22,'DD','KXIP','2023-04-18','20:00:00.0000','2','Closed',460),(23,'MI','SRH','2024-04-18','20:00:00.0000','2','Closed',390),(24,'RCB','CSK','2025-04-18','20:00:00.0000','2','Closed',415),(25,'SRH','KXIP','2026-04-18','20:00:00.0000','1','Closed',340),(26,'DD','KKR','2027-04-18','20:00:00.0000','1','Closed',205),(27,'CSK','MI','2028-04-18','20:00:00.0000','2','Closed',269),(28,'SRH','RR','2029-04-18','16:00:00.0000','1','Closed',210),(29,'RCB','KKR','2029-04-18','20:00:00.0000','2','Closed',270),(30,'CSK','DD','2030-04-18','20:00:00.0000','1','Closed',225),(31,'RCB','MI','2001-05-18','20:00:00.0000','Yet to start','Open for revision bids',255),(32,'DD','RR','2002-05-18','20:00:00.0000','Yet to start','Yet to be openend',0),(33,'KKR','CSK','2003-05-18','20:00:00.0000','Yet to start','Yet to be openend',0),(34,'KXIP','MI','2004-05-18','20:00:00.0000','Yet to start','Yet to be openend',0);
 /*!40000 ALTER TABLE `roster` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `ipl`.`roster_AFTER_UPDATE` AFTER UPDATE ON `roster` FOR EACH ROW
-BEGIN
-
-declare bidPool int;
-declare winningPool int;
-
-if (New.matchDecision != 'Yet to start') 
-then 
-
-
-set bidPool = (select sum(bidAmount) from bids where matchID = New.matchID);
-set winningPool = (select sum(bidAmount) from bids where matchID = New.matchID and predictedResult=New.matchDecision);
-
-update bids
-set winningAmount=(bidAmount/winningPool) * bidPool
-where matchID=New.matchID;
-
-end if;
-
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -91,4 +61,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-23 22:15:48
+-- Dump completed on 2018-05-01 22:37:44

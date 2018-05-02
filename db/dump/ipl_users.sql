@@ -1,8 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS `ipl` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `ipl`;
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
--- Host: 127.0.0.1    Database: ipl
+-- Host: localhost    Database: ipl
 -- ------------------------------------------------------
--- Server version	5.7.19
+-- Server version	8.0.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +33,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`userID`),
   UNIQUE KEY `emailID_UNIQUE` (`emailID`),
   KEY `roles_fk_idx` (`role`),
-  CONSTRAINT `roles_fk` FOREIGN KEY (`role`) REFERENCES `roles` (`roleNames`) ON DELETE NO ACTION ON UPDATE CASCADE
+  CONSTRAINT `roles_fk` FOREIGN KEY (`role`) REFERENCES `roles` (`rolenames`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,7 +43,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('abhishek.chaturvedi','Abhishek','Chaturvedi','Player',NULL),('arjun.swami','Arjun','Swami','Player',NULL),('ashutosh.tiwari','Ashutosh','Tiwari','Player',NULL),('avneesh.sharma','Avneesh','Sharma','Player',NULL),('chinnadurai.v','Chinnadurai','V','Player',NULL),('gaurav.rathi','Gaurav','Rathi','Player',NULL),('gurudayal.khosla','Gurudayal','Khosla','Player',NULL),('kiran.kulkarni','Kiran','Kulkarni','Player',NULL),('mayank.kamboj','Mayank','Kamboj','Player',NULL),('naveen.kumar','Naveen','Kumar','Player',NULL),('prasad.karni','Prasad','Karni','Player',NULL),('rahul.srivatsa','Rahul','Srivatsa','Player',NULL),('ranjan.jha','Ranjan','Jha','Player',NULL),('ranjith','Ranjith',NULL,'Player',NULL),('saket.agrahari','Saket','Agrahari','Player',NULL),('santhosh.krishnamurthy','Santhos','Krishnamurthy','Player',NULL),('shashiraj.itagi','Shashiraj','Itagi','Player',NULL),('snigdhaman.chaterjee','Snigdhaman','Chaterjee','Player',NULL),('sunil.gornale','Sunil','Gornale','Player',NULL),('sunny','Sunny',NULL,'Player',NULL),('thevivekdwivedi','Vivek','Dwivedi','Admin','thevivekdwivedi@gmail.com');
+INSERT INTO `users` VALUES ('abhishek.chaturvedi','Abhishek','Chaturvedi','Player',NULL),('arjun.swami','Arjun','Swami','Player',NULL),('ashutosh.tiwari','Ashutosh','Tiwari','Player',NULL),('avneesh.sharma','Avneesh','Sharma','Player',NULL),('chinnadurai.v','Chinnadurai','V','Player',NULL),('gaurav.rathi','Gaurav','Rathi','Player',NULL),('gurudayal.khosla','Gurudayal','Khosla','Player',NULL),('kiran.kulkarni','Kiran','Kulkarni','Player',NULL),('mayank.kamboj','Mayank','Kamboj','Player',NULL),('naveen.kumar','Naveen','Kumar','Player',NULL),('prasad.karni','Prasad','Karni','Player',NULL),('rahul.srivatsa','Rahul','Srivatsa','Player',NULL),('ranjan.jha','Ranjan','Jha','Player',NULL),('ranjith','Ranjith',NULL,'Player',NULL),('saket.agrahari','Saket','Agrahari','Player',NULL),('santhosh.krishnamurthy','Santhosh','Krishnamurthy','Player',NULL),('shashiraj.itagi','Shashiraj','Itagi','Player',NULL),('snigdhaman.chaterjee','Snigdhaman','Chaterjee','Player',NULL),('sunil.gornale','Sunil','Gornale','Player',NULL),('sunny','Sunny',NULL,'Player',NULL),('thevivekdwivedi','Vivek','Dwivedi','Admin','thevivekdwivedi@gmail.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-23 22:15:48
+-- Dump completed on 2018-05-01 22:37:43

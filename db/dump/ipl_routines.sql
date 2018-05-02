@@ -1,8 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS `ipl` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `ipl`;
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
--- Host: 127.0.0.1    Database: ipl
+-- Host: localhost    Database: ipl
 -- ------------------------------------------------------
--- Server version	5.7.19
+-- Server version	8.0.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -44,18 +46,10 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `leaderboard` AS select `u`.`firstName` AS `first_name`,sum(`b`.`bidAmount`) AS `total_bid_amount`,sum(`b`.`winningAmount`) AS `total_winning_amount`,(sum(`b`.`bidAmount`) - sum(`b`.`winningAmount`)) AS `net_profit_loss`,((sum(`b`.`winningAmount`) / sum(`b`.`bidAmount`)) * 100) AS `efficiency` from (`users` `u` join `bids` `b`) where (`u`.`userID` = `b`.`userID`) group by `u`.`userID` order by `efficiency` */;
+/*!50001 VIEW `leaderboard` AS select `u`.`firstName` AS `first_name`,sum(`b`.`bidAmount`) AS `total_bid_amount`,sum(`b`.`winningAmount`) AS `total_winning_amount`,(sum(`b`.`winningAmount`) - sum(`b`.`bidAmount`)) AS `net_profit_loss`,(((sum(`b`.`winningAmount`) - sum(`b`.`bidAmount`)) / sum(`b`.`bidAmount`)) * 100) AS `efficiency` from (`users` `u` join `bids` `b`) where (`u`.`userID` = `b`.`userID`) group by `u`.`userID` order by `efficiency` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Dumping events for database 'ipl'
---
-
---
--- Dumping routines for database 'ipl'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -66,4 +60,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-23 22:15:49
+-- Dump completed on 2018-05-01 22:37:46
