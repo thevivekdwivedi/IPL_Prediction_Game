@@ -43,8 +43,13 @@ const roster = db.define('roster', {
     },
     bidStatus: {
         type: Sequelize.ENUM("Yet to be opened","Opened for bidding","Closed"),
-        allowNull:false,
+        allowNull: true,
         defaultValue: "Yet to be opened"
+    },
+    matchPool: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0
     }
 }, {
         getterMethods: {

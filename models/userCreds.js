@@ -17,7 +17,7 @@ const userCreds = db.define('userCreds', {
     password: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: "123456"
+        defaultValue: "12345678"
     },
     apiKey: {
         type: Sequelize.STRING,
