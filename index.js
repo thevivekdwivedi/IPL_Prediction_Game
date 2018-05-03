@@ -15,12 +15,14 @@ var users = require('./apis/users_api');
 var userCreds = require('./apis/userCreds_api');
 var roster = require('./apis/roster_api');
 var bids = require('./apis/bids_api');
+var views = require('./apis/views');
 
 app.use('/teams', teams);
 app.use('/users', users);
 app.use('/userCreds', userCreds);
 app.use('/roster', roster);
 app.use('/bids', bids);
+app.user('/view', views);
 
 const port = 4000;
 
