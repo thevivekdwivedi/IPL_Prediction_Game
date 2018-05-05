@@ -41,7 +41,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('abhishek.chaturvedi','Abhishek','Chaturvedi','Player',NULL),('arjun.swami','Arjun','Swami','Player',NULL),('ashutosh.tiwari','Ashutosh','Tiwari','Player',NULL),('avneesh.sharma','Avneesh','Sharma','Player',NULL),('chinnadurai.v','Chinnadurai','V','Player',NULL),('gaurav.rathi','Gaurav','Rathi','Player',NULL),('gurudayal.khosla','Gurudayal','Khosla','Player',NULL),('kiran.kulkarni','Kiran','Kulkarni','Player',NULL),('mayank.kamboj','Mayank','Kamboj','Player',NULL),('naveen.kumar','Naveen','Kumar','Player',NULL),('prasad.karni','Prasad','Karni','Player',NULL),('rahul.srivatsa','Rahul','Srivatsa','Player',NULL),('ranjan.jha','Ranjan','Jha','Player',NULL),('ranjith','Ranjith',NULL,'Player',NULL),('saket.agrahari','Saket','Agrahari','Player',NULL),('santhosh.krishnamurthy','Santhosh','Krishnamurthy','Player',NULL),('shashiraj.itagi','Shashiraj','Itagi','Player',NULL),('snigdhaman.chaterjee','Snigdhaman','Chaterjee','Player',NULL),('sunil.gornale','Sunil','Gornale','Player',NULL),('sunny','Sunny',NULL,'Player',NULL),('thevivekdwivedi','Vivek','Dwivedi','Admin','thevivekdwivedi@gmail.com');
+INSERT INTO `users` VALUES ('abhishek.chaturvedi','Abhishek','Chaturvedi','Player',NULL),('arjun.swami','Arjun','Swami','Player',NULL),('ashutosh.tiwari','Ashutosh','Tiwari','Player',NULL),('avneesh.sharma','Avneesh','Sharma','Player',NULL),('chinnadurai.v','Chinnadurai','V','Player',NULL),('gaurav.rathi','Gaurav','Rathi','Player',NULL),('gurudayal.khosla','Gurudayal','Khosla','Player',NULL),('kiran.kulkarni','Kiran','Kulkarni','Player',NULL),('mayank.kamboj','Mayank','Kamboj','Player',NULL),('naveen.kumar','Naveen','Kumar','Player',NULL),('prasad.karni','Prasad','Karni','Player',NULL),('rahul.srivatsa','Rahul','Srivatsa','Player',NULL),('ranjan.jha','Ranjan','Jha','Player',NULL),('ranjith','Ranjith',NULL,'Player',NULL),('saket.agrahari','Saket','Agrahari','Player',NULL),('santhosh.krishnamurthy','Santhosh','Krishnamurthy','Player',NULL),('shashiraj.itagi','Shashiraj','Itagi','Player',NULL),('snigdhaman.chatterjee','Snigdhaman','Chaterjee','Player',NULL),('sunil.gornale','Sunil','Gornale','Player',NULL),('sunny','Sunny',NULL,'Player',NULL),('thevivekdwivedi','Vivek','Dwivedi','Admin','thevivekdwivedi@gmail.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-03 22:36:59
+-- Dump completed on 2018-05-05 20:47:38

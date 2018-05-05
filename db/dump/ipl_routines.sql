@@ -44,7 +44,10 @@ SET character_set_client = utf8;
  1 AS `total_bid_amount`,
  1 AS `total_winning_amount`,
  1 AS `net_profit_loss`,
- 1 AS `efficiency`*/;
+ 1 AS `bidWinningEfficiency`,
+ 1 AS `totalWins`,
+ 1 AS `totalBids`,
+ 1 AS `predictionEfficiency`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -99,7 +102,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `leaderboard` AS select `u`.`firstName` AS `first_name`,sum(`b`.`bidAmount`) AS `total_bid_amount`,sum(`b`.`winningAmount`) AS `total_winning_amount`,(sum(`b`.`winningAmount`) - sum(`b`.`bidAmount`)) AS `net_profit_loss`,(((sum(`b`.`winningAmount`) - sum(`b`.`bidAmount`)) / sum(`b`.`bidAmount`)) * 100) AS `efficiency` from (`users` `u` join `bids` `b`) where (`u`.`userID` = `b`.`userID`) group by `u`.`userID` order by `efficiency` desc */;
+/*!50001 VIEW `leaderboard` AS select `u`.`firstName` AS `first_name`,sum(`b`.`bidAmount`) AS `total_bid_amount`,sum(`b`.`winningAmount`) AS `total_winning_amount`,(sum(`b`.`winningAmount`) - sum(`b`.`bidAmount`)) AS `net_profit_loss`,(((sum(`b`.`winningAmount`) - sum(`b`.`bidAmount`)) / sum(`b`.`bidAmount`)) * 100) AS `bidWinningEfficiency`,(select count(0) from `bids` `b4` where ((`b4`.`userID` = `b`.`userID`) and (`b4`.`winningAmount` > 0))) AS `totalWins`,(select count(0) from `bids` `b5` where (`b5`.`userID` = `b`.`userID`)) AS `totalBids`,(((select count(0) from `bids` `b2` where ((`b2`.`userID` = `b`.`userID`) and (`b2`.`winningAmount` > 0))) / (select count(0) from `bids` `b3` where (`b3`.`userID` = `b`.`userID`))) * 100) AS `predictionEfficiency` from (`users` `u` join `bids` `b`) where (`u`.`userID` = `b`.`userID`) group by `u`.`userID` order by `predictionEfficiency` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -139,4 +142,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-03 22:37:00
+-- Dump completed on 2018-05-05 20:47:39

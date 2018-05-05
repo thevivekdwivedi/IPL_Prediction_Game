@@ -16,29 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `rules`
+-- Table structure for table `matchDecisions`
 --
 
-DROP TABLE IF EXISTS `rules`;
+DROP TABLE IF EXISTS `matchDecisions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rules` (
-  `ruleID` int(11) NOT NULL AUTO_INCREMENT,
-  `ruleName` varchar(45) NOT NULL,
-  `ruleValue` int(11) NOT NULL,
-  PRIMARY KEY (`ruleID`),
-  UNIQUE KEY `ruleName_UNIQUE` (`ruleName`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `matchDecisions` (
+  `decision` varchar(45) NOT NULL,
+  PRIMARY KEY (`decision`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `rules`
+-- Dumping data for table `matchDecisions`
 --
 
-LOCK TABLES `rules` WRITE;
-/*!40000 ALTER TABLE `rules` DISABLE KEYS */;
-INSERT INTO `rules` VALUES (1,'Bid Start',-24),(2,'Bid End',-4),(3,'Revision Start',-4),(4,'Revision End',-1);
-/*!40000 ALTER TABLE `rules` ENABLE KEYS */;
+LOCK TABLES `matchDecisions` WRITE;
+/*!40000 ALTER TABLE `matchDecisions` DISABLE KEYS */;
+INSERT INTO `matchDecisions` VALUES ('1'),('2'),('Abandon'),('Tie'),('Yet to start');
+/*!40000 ALTER TABLE `matchDecisions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
