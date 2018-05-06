@@ -3,7 +3,7 @@ const db = require('../db/dbConnection');
 
 const bidStatuses = db.define('bidStatuses', {
     statusID: {
-        type: Sequelize.Instance,
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
