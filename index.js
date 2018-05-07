@@ -16,13 +16,19 @@ var userCreds = require('./apis/userCreds_api');
 var roster = require('./apis/roster_api');
 var bids = require('./apis/bids_api');
 var views = require('./apis/views');
+var roles = require('./apis/roles_api');
+var matchDecisions = require('./apis/matchDecisions_api');
+var bidStatuses = require('./apis/bidStatuses_api');
 
 app.use('/teams', teams);
 app.use('/users', users);
 app.use('/userCreds', userCreds);
 app.use('/roster', roster);
 app.use('/bids', bids);
-app.user('/view', views);
+app.use('/view', views);
+app.use('/roles', roles);
+app.use('/matchDecisions', matchDecisions);
+app.use('/bidStatuses', bidStatuses);
 
 const port = 4000;
 

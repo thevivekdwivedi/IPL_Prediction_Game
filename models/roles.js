@@ -1,17 +1,17 @@
 const Sequelize = require('sequelize');
 const db = require('../db/dbConnection');
 
-const bidStatuses = db.define('bidStatuses', {
-    decisionID: {
+const roles = db.define('roles', {
+    roleID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        allowNull: false,
         autoIncrement: true,
+        allowNull: false,
         validate: {
             isNumeric: true
         }
     },
-    decisionName: {
+    roleName: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false,
@@ -21,4 +21,4 @@ const bidStatuses = db.define('bidStatuses', {
     }
 });
 
-module.exports = bidStatuses;
+module.exports = roles;
