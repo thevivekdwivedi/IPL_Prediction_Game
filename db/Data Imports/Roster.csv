@@ -37,8 +37,8 @@ matchID,team1,team2,matchDate,matchTime,matchDecision,bidStatus,matchPool
 36,SRH,DD,2018-05-05,20:00:00.0000,1,Closed,330
 37,MI,KKR,2018-05-06,16:00:00.0000,1,Closed,225
 38,KXIP,RR,2018-05-06,20:00:00.0000,1,Closed,330
-39,SRH,RCB,2018-05-07,20:00:00.0000,"Yet to start","Yet to be opened",0
-40,RR,KXIP,2018-05-08,20:00:00.0000,"Yet to start","Yet to be opened",0
+39,SRH,RCB,2018-05-07,20:00:00.0000,1,Closed,255
+40,RR,KXIP,2018-05-08,20:00:00.0000,"Yet to start","Open for revision",250
 41,KKR,MI,2018-05-09,20:00:00.0000,"Yet to start","Yet to be opened",0
 42,DD,SRH,2018-05-10,20:00:00.0000,"Yet to start","Yet to be opened",0
 43,RR,CSK,2018-05-11,20:00:00.0000,"Yet to start","Yet to be opened",0
