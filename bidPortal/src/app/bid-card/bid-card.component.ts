@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bid-card.component.css']
 })
 export class BidCardComponent implements OnInit {
+  cardTitle: String;
   selectorLabel: String;
   bidAmountLabel: String;
   placeBidButtonLabel: String;
@@ -14,6 +15,7 @@ export class BidCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.cardTitle = "Bid";
     this.selectorLabel = "Match decision";
     this.bidAmountLabel = "Bid amount";
     this.placeBidButtonLabel = "Place bid";
