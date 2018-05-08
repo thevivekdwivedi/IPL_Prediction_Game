@@ -1,0 +1,34 @@
+<div class="col-xl card-cover">
+  <div class="card text-center">
+    <div class="card-header">
+      Bid
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">RCB v CSK 8 May 8 PM</h5>
+      <br>
+      <form action="">
+        <div class="form-row card-text">
+          <label for="decisionSelector" class="col-md">{{selectorLabel}}</label>
+          <select name="decisionSelector" id="decisionSelector" class="col-md">
+            <option value="RCB">RCB</option>
+            <option value="CSK">CSK</option>
+            <option value="Tie">Tie</option>
+            <option value="Abandon">Abandon</option>
+          </select>
+        </div>
+        <br>
+        <div class="form-row">
+          <label for="bidAmount" class="col-md">{{bidAmountLabel}}</label>
+          <input type="text" class="form-control col-md" id="bidAmount" placeholder="5 - 50">
+        </div>
+        <br>
+        <div class="form-row">
+          <a href="#" class="btn btn-primary col-md" id="placeBidButton">{{placeBidButtonLabel}}</a>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer text-muted">
+      {{today | date:'short'}}
+    </div>
+  </div>
+</div>
