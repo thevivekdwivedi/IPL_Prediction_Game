@@ -1,5 +1,3 @@
-import { SSL_OP_MICROSOFT_BIG_SSLV3_BUFFER } from 'constants';
-
 const express = require('express');
 const router = express.Router();
 const Sequelize = require('sequelize');

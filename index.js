@@ -22,7 +22,7 @@ app.use('/users', users);
 app.use('/userCreds', userCreds);
 app.use('/roster', roster);
 app.use('/bids', bids);
-app.user('/view', views);
+app.use('/view', views);
 
 const port = 4000;
 
