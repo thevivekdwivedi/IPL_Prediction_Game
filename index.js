@@ -16,6 +16,8 @@ var userCreds = require('./apis/userCreds_api');
 var roster = require('./apis/roster_api');
 var bids = require('./apis/bids_api');
 var views = require('./apis/views');
+var roles = require('./apis/roles_api');
+var matchDecisions = require('./apis/matchDecisions_api');
 var bidStatuses = require('./apis/bidStatuses_api');
 var matchDecisions = require('./apis/matchDecisions_api');
 
@@ -25,9 +27,9 @@ app.use('/userCreds', userCreds);
 app.use('/roster', roster);
 app.use('/bids', bids);
 app.use('/view', views);
-app.use('/bidStatus', bidStatuses);
+app.use('/roles', roles);
+app.use('/bidStatuses', bidStatuses);
 app.use('/matchDecisions', matchDecisions);
-
 
 const port = 4000;
 

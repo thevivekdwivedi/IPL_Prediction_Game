@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../db/dbConnection');
 const teams = require('./teams');
+const statuses = require('./bidStatuses');
+const decisions = require('./matchDecisions');
 
 const roster = db.define('roster', {
     matchID: {
@@ -37,14 +39,20 @@ const roster = db.define('roster', {
         allowNull: false
     },
     matchDecision: {
-        type: Sequelize.ENUM("1", "2", "Tie", "Abandon","Yet to start"),
-        allowNull: true,
-        defaultValue: "Yet to start"
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: decisions,
+            key: 'decisionID'
+        }
     },
     bidStatus: {
-        type: Sequelize.ENUM("Yet to be opened","Opened for bidding","Closed"),
-        allowNull: true,
-        defaultValue: "Yet to be opened"
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: statuses,
+            key: 'statusID'
+        }
     },
     matchPool: {
         type: Sequelize.INTEGER,
