@@ -19,6 +19,7 @@ var views = require('./apis/views');
 var roles = require('./apis/roles_api');
 var matchDecisions = require('./apis/matchDecisions_api');
 var bidStatuses = require('./apis/bidStatuses_api');
+var matchDecisions = require('./apis/matchDecisions_api');
 
 app.use('/teams', teams);
 app.use('/users', users);
@@ -27,8 +28,8 @@ app.use('/roster', roster);
 app.use('/bids', bids);
 app.use('/view', views);
 app.use('/roles', roles);
-app.use('/matchDecisions', matchDecisions);
 app.use('/bidStatuses', bidStatuses);
+app.use('/matchDecisions', matchDecisions);
 
 const port = 4000;
 
